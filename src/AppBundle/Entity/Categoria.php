@@ -24,10 +24,24 @@ class Categoria
     /**
      * @var string
      *
-     * @ORM\Column(name="nombre", type="string", length=255, nullable=false, unique=false)
+     * @ORM\Column(name="nombre", type="string", length=255, precision=0, scale=0, nullable=false, unique=false)
      */
     private $nombre;
 
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Pelicula", mappedBy="categoria")
+     */
+    private $pelicula;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->pelicula = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * Get id
@@ -61,6 +75,40 @@ class Categoria
     public function getNombre()
     {
         return $this->nombre;
+    }
+
+    /**
+     * Add pelicula
+     *
+     * @param \AppBundle\Entity\Pelicula $pelicula
+     *
+     * @return Categoria
+     */
+    public function addPelicula(\AppBundle\Entity\Pelicula $pelicula)
+    {
+        $this->pelicula[] = $pelicula;
+
+        return $this;
+    }
+
+    /**
+     * Remove pelicula
+     *
+     * @param \AppBundle\Entity\Pelicula $pelicula
+     */
+    public function removePelicula(\AppBundle\Entity\Pelicula $pelicula)
+    {
+        $this->pelicula->removeElement($pelicula);
+    }
+
+    /**
+     * Get pelicula
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getPelicula()
+    {
+        return $this->pelicula;
     }
 }
 

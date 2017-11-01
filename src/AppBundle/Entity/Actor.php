@@ -24,17 +24,41 @@ class Actor
     /**
      * @var string
      *
-     * @ORM\Column(name="nombre", type="string", length=255, nullable=false, unique=false)
+     * @ORM\Column(name="nombre", type="string", length=255, precision=0, scale=0, nullable=false, unique=false)
      */
     private $nombre;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="anio_nacimiento", type="integer", nullable=false, unique=false)
+     * @ORM\Column(name="anio_nacimiento", type="integer", precision=0, scale=0, nullable=false, unique=false)
      */
     private $anioNacimiento;
 
+    /**
+     * @var \AppBundle\Entity\Pais
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Pais", inversedBy="actor")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="pais_id", referencedColumnName="id")
+     * })
+     */
+    private $pais;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Pelicula", mappedBy="actor")
+     */
+    private $pelicula;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->pelicula = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * Get id
@@ -92,6 +116,64 @@ class Actor
     public function getAnioNacimiento()
     {
         return $this->anioNacimiento;
+    }
+
+    /**
+     * Set pais
+     *
+     * @param \AppBundle\Entity\Pais $pais
+     *
+     * @return Actor
+     */
+    public function setPais(\AppBundle\Entity\Pais $pais = null)
+    {
+        $this->pais = $pais;
+
+        return $this;
+    }
+
+    /**
+     * Get pais
+     *
+     * @return \AppBundle\Entity\Pais
+     */
+    public function getPais()
+    {
+        return $this->pais;
+    }
+
+    /**
+     * Add pelicula
+     *
+     * @param \AppBundle\Entity\Pelicula $pelicula
+     *
+     * @return Actor
+     */
+    public function addPelicula(\AppBundle\Entity\Pelicula $pelicula)
+    {
+        $this->pelicula[] = $pelicula;
+
+        return $this;
+    }
+
+    /**
+     * Remove pelicula
+     *
+     * @param \AppBundle\Entity\Pelicula $pelicula
+     */
+    public function removePelicula(\AppBundle\Entity\Pelicula $pelicula)
+    {
+        $this->pelicula->removeElement($pelicula);
+    }
+
+    /**
+     * Get pelicula
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getPelicula()
+    {
+        return $this->pelicula;
     }
 }
 
