@@ -38,7 +38,7 @@ class Idioma
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Pelicula", inversedBy="idioma")
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Pelicula", inversedBy="peliculasubtitulos")
      * @ORM\JoinTable(name="idioma_pelicula",
      *   joinColumns={
      *     @ORM\JoinColumn(name="idioma_id", referencedColumnName="id", onDelete="CASCADE")
@@ -48,7 +48,7 @@ class Idioma
      *   }
      * )
      */
-    private $subtitulos;
+    private $idiomasubtitulos;
 
     /**
      * Constructor
@@ -56,7 +56,7 @@ class Idioma
     public function __construct()
     {
         $this->pelicula = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->subtitulos = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->idiomasubtitulos = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -128,37 +128,37 @@ class Idioma
     }
 
     /**
-     * Add subtitulo
+     * Add idiomasubtitulo
      *
-     * @param \AppBundle\Entity\Pelicula $subtitulo
+     * @param \AppBundle\Entity\Pelicula $idiomasubtitulo
      *
      * @return Idioma
      */
-    public function addSubtitulo(\AppBundle\Entity\Pelicula $subtitulo)
+    public function addIdiomasubtitulo(\AppBundle\Entity\Pelicula $idiomasubtitulo)
     {
-        $this->subtitulos[] = $subtitulo;
+        $this->idiomasubtitulos[] = $idiomasubtitulo;
 
         return $this;
     }
 
     /**
-     * Remove subtitulo
+     * Remove idiomasubtitulo
      *
-     * @param \AppBundle\Entity\Pelicula $subtitulo
+     * @param \AppBundle\Entity\Pelicula $idiomasubtitulo
      */
-    public function removeSubtitulo(\AppBundle\Entity\Pelicula $subtitulo)
+    public function removeIdiomasubtitulo(\AppBundle\Entity\Pelicula $idiomasubtitulo)
     {
-        $this->subtitulos->removeElement($subtitulo);
+        $this->idiomasubtitulos->removeElement($idiomasubtitulo);
     }
 
     /**
-     * Get subtitulos
+     * Get idiomasubtitulos
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getSubtitulos()
+    public function getIdiomasubtitulos()
     {
-        return $this->subtitulos;
+        return $this->idiomasubtitulos;
     }
 }
 

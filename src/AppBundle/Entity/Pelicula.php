@@ -95,9 +95,9 @@ class Pelicula
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Idioma", mappedBy="pelicula")
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Idioma", mappedBy="idiomasubtitulos")
      */
-    private $subtitulos;
+    private $peliculasubtitulos;
 
     /**
      * Constructor
@@ -106,7 +106,7 @@ class Pelicula
     {
         $this->actor = new \Doctrine\Common\Collections\ArrayCollection();
         $this->idioma = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->subtitulos = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->peliculasubtitulos = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -308,37 +308,37 @@ class Pelicula
     }
 
     /**
-     * Add subtitulo
+     * Add peliculasubtitulo
      *
-     * @param \AppBundle\Entity\Idioma $subtitulo
+     * @param \AppBundle\Entity\Idioma $peliculasubtitulo
      *
      * @return Pelicula
      */
-    public function addSubtitulo(\AppBundle\Entity\Idioma $subtitulo)
+    public function addPeliculasubtitulo(\AppBundle\Entity\Idioma $peliculasubtitulo)
     {
-        $this->subtitulos[] = $subtitulo;
+        $this->peliculasubtitulos[] = $peliculasubtitulo;
 
         return $this;
     }
 
     /**
-     * Remove subtitulo
+     * Remove peliculasubtitulo
      *
-     * @param \AppBundle\Entity\Idioma $subtitulo
+     * @param \AppBundle\Entity\Idioma $peliculasubtitulo
      */
-    public function removeSubtitulo(\AppBundle\Entity\Idioma $subtitulo)
+    public function removePeliculasubtitulo(\AppBundle\Entity\Idioma $peliculasubtitulo)
     {
-        $this->subtitulos->removeElement($subtitulo);
+        $this->peliculasubtitulos->removeElement($peliculasubtitulo);
     }
 
     /**
-     * Get subtitulos
+     * Get peliculasubtitulos
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getSubtitulos()
+    public function getPeliculasubtitulos()
     {
-        return $this->subtitulos;
+        return $this->peliculasubtitulos;
     }
 }
 
